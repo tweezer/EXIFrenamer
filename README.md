@@ -5,6 +5,9 @@ It has been written on a Mac (macOS 10.14), but I think it should work on other 
 
 
 
+## Version 0.2.1 (2020-01-05)
+I was using os.scandir() in the wrong way. With the help over Mastodon (Social Network) I was able to fix it. Now the script is running. So I can focus on new features again!
+
 ## Version 0.2 (2020-01-05)
 I've changed a lot in the script. First now it's fully written in Python 3 (min 3.6 needed!) and does not have any Python 2 Code anymore. Second thing is, I've made the script more variable. You can now pass the needed path as a parameter when calling the script. And I've added some output too, so you can see what the script is doing.
 
