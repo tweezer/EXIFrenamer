@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, subprocess
+import os, sys, subprocess, pathlib
 filecounter = 1
 if len(sys.argv) > 1:
    path = sys.argv[1]
@@ -12,8 +12,16 @@ if len(sys.argv) > 1:
        exifreturn = subprocess.run(["exiftool","-Description",fullfilename],capture_output=True,text=True).stdout
        exifarray = exifreturn.split(":")
        newfilename = exifarray[1].strip() + ".jpg"
-       os.rename(fullfilename,path + newfilename)
-       print("Renaming File #" + str(filecounter) + ": " + filename + " -> " + newfilename)
+       newfilecheck = pathlib.Path(path + newfilename)
+       if len(newfilename) >= 5:
+           if newfilecheck.is_file():
+               os.rename(fullfilename, path + "copy_" + newfilename)
+               print("Renaming File #" + str(filecounter) + ": " + filename + " -> copy_" + filecounter + "_" + newfilename)
+           else:
+               os.rename(fullfilename,path + newfilename)
+               print("Renaming File #" + str(filecounter) + ": " + filename + " -> " + newfilename)
+       else:
+          print ("File #" + str(filecounter) + " " + filename + ": has empty EXIF/IPTC Data - skipping")
        filecounter += 1
 else:
     path("Path is missing! Please start the script this way: iptcrenamer.py /path/to/your/files/")
