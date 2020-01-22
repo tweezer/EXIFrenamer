@@ -15,7 +15,7 @@ if len(sys.argv) > 1:
        newfilecheck = pathlib.Path(path + newfilename)
        if len(newfilename) >= 5:
            if newfilecheck.is_file():
-               os.rename(fullfilename, path + "copy_" + newfilename)
+               os.rename(fullfilename, path + "copy_" + str(filecounter) + “_” + newfilename)
                print("Renaming File #" + str(filecounter) + ": " + filename + " -> copy_" + str(filecounter) + "_" + newfilename)
            else:
                os.rename(fullfilename,path + newfilename)
